@@ -3,6 +3,7 @@ package com.example.chooseyouradventurev2;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,9 +24,9 @@ public class JeuQuizz extends AppCompatActivity {
     private Button choix1, choix2, choix3, choix4;
 
     /**
-     * variable definissant l enonce
+     * variable definissant l enonce et le score
      */
-    private TextView enonce;
+    private TextView enonce, textScore;
 
     /**
      * variable definissant le tableau des choix, des questions et des bons choix
@@ -36,7 +37,7 @@ public class JeuQuizz extends AppCompatActivity {
     /**
      * variable definissant les questions deja passe
      */
-    private ArrayList tabQuestionPasse;
+    private ArrayList<Integer> tabQuestionPasse;
 
     /**
      * variable définissant le numero de la question
@@ -49,6 +50,16 @@ public class JeuQuizz extends AppCompatActivity {
     private int score;
 
     /**
+     * variable definissant les jeux deja fais
+     */
+    private ArrayList<Integer> tabJeu;
+
+    /**
+     * variable definissant l activite suivante
+     */
+    private Intent activite;
+
+    /**
      * Constructeur permettant l'initialisation de l activite
      * @param savedInstanceState : paramétre permettant de sauvegarder l etat de la page
      */
@@ -56,6 +67,12 @@ public class JeuQuizz extends AppCompatActivity {
 
         // on appelle le constructeur de AppCompatActivity
         super.onCreate(savedInstanceState);
+
+        // on recupere le score
+        score = getIntent().getIntExtra("score",0);
+
+        // on recupere les jeux deja fais
+        tabJeu = getIntent().getIntegerArrayListExtra("tabJeu");
 
         // application du layout sur l activite
         setContentView(R.layout.activity_jeu_quizz);
@@ -69,13 +86,17 @@ public class JeuQuizz extends AppCompatActivity {
         // recuperation de l enonce
         enonce = findViewById(R.id.enonce);
 
+        // recuperation du texte du score
+        textScore = findViewById(R.id.score);
+
         // on initialise le tableau des questions deja pose
-        tabQuestionPasse = new ArrayList<Integer>();
+        tabQuestionPasse = new ArrayList<>();
 
         // affectation des actions de choix 1
         choix1.setOnClickListener(new View.OnClickListener() {
 
             // on gere le cas du clique
+            @SuppressLint("SetTextI18n")
             public void onClick(View v) {
 
                 // on cree l alerte
@@ -104,6 +125,9 @@ public class JeuQuizz extends AppCompatActivity {
 
                 }
 
+                // on ajoute le texte du score
+                textScore.setText("score : " + score);
+
                 // on cree l ecoute des actions sur l alerte
                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {
 
@@ -126,8 +150,16 @@ public class JeuQuizz extends AppCompatActivity {
                     // on lance la prochaine question et si toutes les questions ont ete pose alors on lance la prochaine activite
                     if (!initialisationQuizz()) {
 
-                        // on lance l activity suivante
-                        startActivity(new Intent(JeuQuizz.this, MainActivity.class));
+                        // on definis l activite comme etant celle de JeuQuizz
+                        activite = new Intent(JeuQuizz.this, MainActivity.class);
+
+                        // on envoie le score et les jeux deja faient a l activite
+                        activite.putExtra("score",score);
+                        activite.putExtra("tabJeu",tabJeu.add(0));
+                        activite.putExtra("dejaJoue",true);
+
+                        // on lance l activity
+                        startActivity(activite);
 
                     }
 
@@ -141,6 +173,7 @@ public class JeuQuizz extends AppCompatActivity {
         choix2.setOnClickListener(new View.OnClickListener() {
 
             // on gere le cas du clique
+            @SuppressLint("SetTextI18n")
             public void onClick(View v) {
 
                 // on cree l alerte
@@ -169,6 +202,9 @@ public class JeuQuizz extends AppCompatActivity {
 
                 }
 
+                // on ajoute le texte du score
+                textScore.setText("score : " + score);
+
                 // on cree l ecoute des actions sur l alerte
                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {
 
@@ -184,8 +220,16 @@ public class JeuQuizz extends AppCompatActivity {
                             // on lance la prochaine question et si toutes les questions ont ete pose alors on lance la prochaine activite
                             if (!initialisationQuizz()) {
 
-                                // on lance l activity suivante
-                                startActivity(new Intent(JeuQuizz.this, MainActivity.class));
+                                // on definis l activite comme etant celle de JeuQuizz
+                                activite = new Intent(JeuQuizz.this, MainActivity.class);
+
+                                // on envoie le score et les jeux deja faient a l activite
+                                activite.putExtra("score",score);
+                                activite.putExtra("tabJeu",tabJeu.add(0));
+                                activite.putExtra("dejaJoue",true);
+
+                                // on lance l activity
+                                startActivity(activite);
 
                             }
 
@@ -206,6 +250,7 @@ public class JeuQuizz extends AppCompatActivity {
         choix3.setOnClickListener(new View.OnClickListener() {
 
             // on gere le cas du clique
+            @SuppressLint("SetTextI18n")
             public void onClick(View v) {
 
                 // on cree l alerte
@@ -234,6 +279,9 @@ public class JeuQuizz extends AppCompatActivity {
 
                 }
 
+                // on ajoute le texte du score
+                textScore.setText("score : " + score);
+
                 // on cree l ecoute des actions sur l alerte
                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {
 
@@ -249,8 +297,16 @@ public class JeuQuizz extends AppCompatActivity {
                             // on lance la prochaine question et si toutes les questions ont ete pose alors on lance la prochaine activite
                             if (!initialisationQuizz()) {
 
-                                // on lance l activity suivante
-                                startActivity(new Intent(JeuQuizz.this, MainActivity.class));
+                                // on definis l activite comme etant celle de JeuQuizz
+                                activite = new Intent(JeuQuizz.this, MainActivity.class);
+
+                                // on envoie le score et les jeux deja faient a l activite
+                                activite.putExtra("score",score);
+                                activite.putExtra("tabJeu",tabJeu.add(0));
+                                activite.putExtra("dejaJoue",true);
+
+                                // on lance l activity
+                                startActivity(activite);
 
                             }
 
@@ -271,6 +327,7 @@ public class JeuQuizz extends AppCompatActivity {
         choix4.setOnClickListener(new View.OnClickListener() {
 
             // on gere le cas du clique
+            @SuppressLint("SetTextI18n")
             public void onClick(View v) {
 
                 // on cree l alerte
@@ -299,6 +356,9 @@ public class JeuQuizz extends AppCompatActivity {
 
                 }
 
+                // on ajoute le texte du score
+                textScore.setText("score : " + score);
+
                 // on cree l ecoute des actions sur l alerte
                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {
 
@@ -314,8 +374,16 @@ public class JeuQuizz extends AppCompatActivity {
                             // on lance la prochaine question et si toutes les questions ont ete pose alors on lance la prochaine activite
                             if (!initialisationQuizz()) {
 
-                                // on lance l activity suivante
-                                startActivity(new Intent(JeuQuizz.this, MainActivity.class));
+                                // on definis l activite comme etant celle de JeuQuizz
+                                activite = new Intent(JeuQuizz.this, MainActivity.class);
+
+                                // on envoie le score et les jeux deja faient a l activite
+                                activite.putExtra("score",score);
+                                activite.putExtra("tabJeu",tabJeu.add(0));
+                                activite.putExtra("dejaJoue",true);
+
+                                // on lance l activity
+                                startActivity(activite);
 
                             }
 
@@ -371,6 +439,8 @@ public class JeuQuizz extends AppCompatActivity {
         choix2.setText(tabQuizz[random][2]);
         choix3.setText(tabQuizz[random][3]);
         choix4.setText(tabQuizz[random][4]);
+
+
 
         // on renvoit true
         return true;
