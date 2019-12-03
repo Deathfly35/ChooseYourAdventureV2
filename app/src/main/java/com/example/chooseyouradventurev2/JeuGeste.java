@@ -98,7 +98,7 @@ public class JeuGeste extends AppCompatActivity implements SensorEventListener {
             long tempsActuel = System.currentTimeMillis();
 
             // si cela va faire plus de 100 milisecondes que l on a pas detecte
-            if ((tempsActuel - derniereDetection) > 1000) {
+            if ((tempsActuel - derniereDetection) > 2000) {
 
                 // on recupere la difference de la derniere mise à jour et le temps actuel
                 derniereDetection = tempsActuel;
@@ -242,11 +242,12 @@ public class JeuGeste extends AppCompatActivity implements SensorEventListener {
         // si on a effectué le nombre d'instruction attendus
         if(NBMAXINSTRUCTION == nbInstruction){
 
-            // on definis l activite comme etant celle de JeuQuizz
+            // on definis l activite comme etant celle de JeuGeste
             Intent activite = new Intent(JeuGeste.this, MainActivity.class);
 
             // on envoie le score a l activite
             activite.putExtra("score",score);
+            activite.putExtra("dejaJoue",true);
 
             // on lance l activity
             startActivity(activite);

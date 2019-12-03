@@ -98,6 +98,8 @@ public class MainActivity extends AppCompatActivity {
         // on fais un chiffre aléatoire entre 0 et 1 bornes comprises
         int random = (int) (Math.random() * 2);
 
+        random = 2;
+
         // en fonction de la valeur du random on joue à un jeu différent et donc
         switch (random) {
 

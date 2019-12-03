@@ -426,7 +426,7 @@ public class JeuQuizz extends AppCompatActivity {
             random = (int)(Math.random() * tabQuizz.length);
 
         // on est sur une question qui existe deja
-        }while(tabQuestionPasse.contains(random));
+        } while(tabQuestionPasse.contains(random));
 
         // on ajoute numero de la question
         tabQuestionPasse.add(random);

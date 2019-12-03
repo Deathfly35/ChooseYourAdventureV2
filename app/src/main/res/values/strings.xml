@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">ChooseYourAdventureV2</string>
     <string name="start_the_game">Start the game</string>
+    <string name="score_0">score : 0</string>
 </resources>
